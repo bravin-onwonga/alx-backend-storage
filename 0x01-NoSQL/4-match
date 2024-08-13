@@ -1,2 +1,2 @@
-// Find all documents in a collection with a certain object
+// Find all documents in a collection with a certain pattern
 db.school.find({"name": "Holberton school"})
