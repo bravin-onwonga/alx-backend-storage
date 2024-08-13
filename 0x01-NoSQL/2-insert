@@ -1,4 +1,5 @@
 //Add to a collection
-use "$1"
+dbname="$1"
+use $dbmane
 db.createCollection("school")
-db.school.insertOne({name: "Holberton school"})
+db.school.insertOne({"name": "Holberton school"})
