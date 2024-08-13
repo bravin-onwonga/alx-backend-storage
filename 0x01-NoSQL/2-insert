@@ -1,5 +1,3 @@
-//Add to a collection
-dbname="$1"
-use $dbmane
+//create and add to a collection
 db.createCollection("school")
 db.school.insertOne({"name": "Holberton school"})
