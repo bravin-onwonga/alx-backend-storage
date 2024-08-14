@@ -17,20 +17,20 @@ class Cache(object):
             data: can be str, bytes, int, float
         Returns: unique key generated
         """
-        key = str(uuid.uuid4())
+        key: str = str(uuid.uuid4())
         self._redis.set(key, data)
         return key
 
     def get(self, key: str,
             fn: Optional[Callable[Union[str, int], [str, int]]]):
         """Reading from Redis and recovering original type"""
-        value = self._redis.get(key)
+        value: Union[str, bytes, int, float] = self._redis.get(key)
         if fn == int:
-            value = self.get_int(value)
+            value: int = self.get_int(value)
         elif fn is None:
-            value = self.get_str(value)
+            value: str = self.get_str(value)
         else:
-            value = fn(value)
+            value: Union[str, bytes, int, float] = fn(value)
 
         return value
 
