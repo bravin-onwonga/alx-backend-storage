@@ -2,7 +2,7 @@
 """Writing to redis"""
 import redis
 import uuid
-from typing import Union
+from typing import Union, Callable, Optional
 
 
 class Cache(object):
@@ -20,3 +20,26 @@ class Cache(object):
         key = str(uuid.uuid4())
         self._redis.set(key, data)
         return key
+
+    def get(self, key: str,
+            fn: Optional[Callable[Union[str, int], [str, int]]]):
+        """Reading from Redis and recovering original type"""
+        value = self._redis.get(key)
+        if fn == int:
+            value = self.get_int(value)
+        elif fn is None:
+            value = self.get_str(value)
+        else:
+            value = fn(value)
+
+        return value
+
+    def get_str(self, vaue: bytes):
+        """Automatically parametrize Cache.get with
+        the correct conversion function"""
+        return str(value)
+
+    def get_int(self):
+        """Automatically parametrize Cache.get with
+        the correct conversion function"""
+        return str(value)
