@@ -4,6 +4,11 @@ import redis
 import uuid
 from typing import Union, Callable, Optional
 
+@decorator
+def count_calls(method: Callable) -> Callable:
+    """Incrementing values in redis"""
+    key = method.__qualname__
+
 
 class Cache(object):
     def __init__(self) -> None:
