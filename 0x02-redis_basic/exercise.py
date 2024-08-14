@@ -27,7 +27,7 @@ class Cache(object):
         value: Union[str, bytes, int, float] = self._redis.get(key)
         if fn == int:
             value: int = self.get_int(value)
-        elif fn is None:
+        elif fn is None or fn == str:
             value: str = self.get_str(value)
         else:
             value: Union[str, bytes, int, float] = fn(value)
