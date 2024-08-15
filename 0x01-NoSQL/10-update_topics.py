@@ -4,4 +4,6 @@
 
 def update_topics(mongo_collection, name, topics):
     """Updates the value of a document"""
-    mongo_collection.update_one(name, topics)
+    query = {"name": name}
+    new_topics = {"$set": {"topics": topics}}
+    mongo_collection.update_one(query, new_topics)
