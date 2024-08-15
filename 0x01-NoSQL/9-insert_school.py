@@ -9,4 +9,4 @@ def insert_school(mongo_collection, **kwargs):
         kwargs: list of arguments to add
     """
     col = mongo_collection.insert_one(kwargs)
-    return col.get('_id')
+    return col.inserted_id
