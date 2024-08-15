@@ -8,5 +8,5 @@ def insert_school(mongo_collection, **kwargs):
         mongo_collection: pymongo collection object
         kwargs: list of arguments to add
     """
-    col = mongo_collection.insert_many(kwargs)
-    return col.inserted_id
+    col = mongo_collection.insert_one(kwargs)
+    return col.get('_id')
